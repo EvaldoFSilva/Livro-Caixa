@@ -284,6 +284,44 @@
   .addsub-row{ display:flex; gap:6px; padding:0 14px 12px; }
   .addsub-row input{ flex:1; }
 
+  /* ---------- Fluxo Diário ---------- */
+  .fx-quickrow{ display:flex; gap:8px; align-items:flex-end; }
+  .fx-quickrow .field{ flex:1; }
+  .fx-btn-hoje{
+    flex-shrink:0; border:1px solid var(--line-soft); background:#fff; border-radius:var(--radius-s);
+    padding:9px 12px; font-size:.8rem; font-weight:600; color:var(--text-muted);
+  }
+  .fx-btn-hoje:hover{ border-color:var(--brass); color:var(--text-on-paper); }
+  .fx-actionrow{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+  .fx-btn-gasto, .fx-btn-receita{
+    border:none; border-radius:var(--radius-s); padding:11px; font-size:.86rem; font-weight:700; color:#fff;
+  }
+  .fx-btn-gasto{ background:var(--pagar); }
+  .fx-btn-gasto:hover{ background:#A5432C; }
+  .fx-btn-receita{ background:var(--receber); }
+  .fx-btn-receita:hover{ background:#347A5D; }
+  .fx-toggle{ display:flex; align-items:center; gap:7px; margin-top:10px; }
+  .fx-toggle input{ width:auto; accent-color:var(--brass); }
+  .fx-toggle label{ margin:0; text-transform:none; letter-spacing:0; font-size:.84rem; color:var(--text-on-paper); }
+
+  .fx-resumo3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border:1px solid var(--line-soft); border-radius:var(--radius-m); overflow:hidden; margin-top:14px; }
+  .fx-resumo3 .box{ padding:10px 8px; text-align:center; border-left:1px solid var(--line-soft); }
+  .fx-resumo3 .box:first-child{ border-left:none; }
+  .fx-resumo3 .lbl{ display:block; font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); margin-bottom:3px; }
+  .fx-resumo3 .val{ font-size:.92rem; font-weight:700; }
+  .fx-resumo3 .val.gasto{ color:var(--pagar); }
+  .fx-resumo3 .val.receita{ color:var(--receber); }
+
+  .fx-pie-wrap{ display:flex; align-items:center; gap:16px; margin-top:6px; flex-wrap:wrap; }
+  .fx-pie-wrap svg{ width:120px; height:120px; flex-shrink:0; }
+  .fx-pie-legend{ flex:1; min-width:150px; }
+  .fx-pie-legend .item{ display:flex; align-items:center; gap:7px; font-size:.8rem; margin-bottom:5px; }
+  .fx-pie-legend .item .sw{ width:9px; height:9px; border-radius:2px; flex-shrink:0; }
+  .fx-pie-legend .item .nm{ flex:1; color:var(--text-on-paper); }
+  .fx-pie-legend .item .pc{ color:var(--text-muted); font-size:.74rem; }
+  #tab-fluxodiario table{ min-width:0; }
+  #tab-fluxodiario td.r{ white-space:nowrap; }
+
   footer.note{ text-align:center; color:#8FA396; font-size:.76rem; margin-top:26px; }
 
   @media (max-width:640px){
@@ -313,6 +351,7 @@
     </div>
     <div class="tabs">
       <button class="active" data-tab="lancamentos">Lançamentos</button>
+      <button data-tab="fluxodiario">Fluxo Diário</button>
       <button data-tab="categorias">Categorias</button>
     </div>
   </div>
@@ -411,6 +450,65 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- ===================== TAB: FLUXO DIÁRIO ===================== -->
+  <div id="tab-fluxodiario" style="display:none;">
+    <div class="panel">
+      <div class="panel-head"><h2>Registro rápido</h2></div>
+      <p class="hint" style="margin-bottom:12px;">Pra coisas pequenas do dia a dia — sem precisar preencher o formulário completo. Usa as mesmas categorias do resto do app.</p>
+      <div class="fx-quickrow">
+        <div class="field">
+          <label for="fxData">Data</label>
+          <input type="date" id="fxData">
+        </div>
+        <button type="button" class="fx-btn-hoje" id="fxBtnHoje">Hoje</button>
+      </div>
+      <div class="grid cols-2" style="margin-top:12px;">
+        <div class="field">
+          <label for="fxValor">Valor (R$)</label>
+          <input type="number" step="0.01" min="0" class="num-input" id="fxValor" placeholder="0,00">
+        </div>
+        <div class="field">
+          <label for="fxCategoria">Origem / Categoria</label>
+          <input type="text" id="fxCategoria" list="dlCategorias" placeholder="ex: Mercado" autocomplete="off">
+        </div>
+      </div>
+      <div class="fx-toggle">
+        <input type="checkbox" id="fxEfetuado" checked>
+        <label for="fxEfetuado">Já efetuado</label>
+      </div>
+      <div class="fx-actionrow">
+        <button type="button" class="fx-btn-gasto" id="fxBtnGasto">Registrar Gasto</button>
+        <button type="button" class="fx-btn-receita" id="fxBtnReceita">Registrar Receita</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Histórico do mês</h2>
+        <input type="month" id="fxFiltroMes">
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr><th>Data</th><th>Categoria</th><th class="r">Valor</th><th></th></tr>
+          </thead>
+          <tbody id="fxTbody"></tbody>
+        </table>
+        <div class="empty" id="fxEmptyState" style="display:none;">Nada lançado neste mês ainda.</div>
+      </div>
+      <div class="fx-resumo3">
+        <div class="box"><span class="lbl">Despesas</span><div class="val gasto num" id="fxLblDespesas">R$ 0,00</div></div>
+        <div class="box"><span class="lbl">Receitas</span><div class="val receita num" id="fxLblReceitas">R$ 0,00</div></div>
+        <div class="box"><span class="lbl">Saldo</span><div class="val num" id="fxLblSaldo">R$ 0,00</div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Para onde foi o dinheiro</h2></div>
+      <div class="fx-pie-wrap" id="fxPieWrap"></div>
+    </div>
   </div>
 
   <!-- ===================== TAB: CATEGORIAS ===================== -->
@@ -519,15 +617,18 @@
   var filtro = { ano: new Date().getFullYear(), mes: null, categoriaId: "", texto: "" };
 
   /* ---------------- tabs ---------------- */
-  document.querySelectorAll('.tabs button').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      document.querySelectorAll('.tabs button').forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      var tab = btn.getAttribute('data-tab');
-      document.getElementById('tab-lancamentos').style.display = tab === 'lancamentos' ? '' : 'none';
-      document.getElementById('tab-categorias').style.display = tab === 'categorias' ? '' : 'none';
-      if(tab === 'categorias') renderCategorias();
+  function switchTab(tab){
+    document.querySelectorAll('.tabs button').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-tab') === tab);
     });
+    document.getElementById('tab-lancamentos').style.display = tab === 'lancamentos' ? '' : 'none';
+    document.getElementById('tab-fluxodiario').style.display = tab === 'fluxodiario' ? '' : 'none';
+    document.getElementById('tab-categorias').style.display = tab === 'categorias' ? '' : 'none';
+    if(tab === 'categorias') renderCategorias();
+    if(tab === 'fluxodiario') renderFluxoDiario();
+  }
+  document.querySelectorAll('.tabs button').forEach(function(btn){
+    btn.addEventListener('click', function(){ switchTab(btn.getAttribute('data-tab')); });
   });
 
   /* ---------------- ano select ---------------- */
@@ -965,6 +1066,130 @@
     });
   }
 
+  /* ---------------- Fluxo Diário (registro rápido) ---------------- */
+  var fxData = document.getElementById('fxData');
+  var fxValor = document.getElementById('fxValor');
+  var fxCategoria = document.getElementById('fxCategoria');
+  var fxEfetuado = document.getElementById('fxEfetuado');
+  var fxFiltroMes = document.getElementById('fxFiltroMes');
+
+  function fxHojeStr(){ return new Date().toISOString().slice(0,10); }
+  function fxMesAtualStr(){ return new Date().toISOString().slice(0,7); }
+
+  document.getElementById('fxBtnHoje').addEventListener('click', function(){ fxData.value = fxHojeStr(); });
+
+  function fxSalvar(tipo){
+    var dataVal = fxData.value;
+    var valorVal = Number(fxValor.value);
+    var catNome = norm(fxCategoria.value);
+    if(!dataVal){ alert('Informe a data.'); return; }
+    if(!valorVal || valorVal <= 0){ alert('Informe um valor válido.'); return; }
+    if(!catNome){ alert('Informe a categoria/origem.'); return; }
+
+    var cat = getOrCreateCategoria(catNome);
+    state.lancamentos.push({
+      id: uid(),
+      data: dataVal,
+      categoriaId: cat.id,
+      subcategoriaId: null,
+      observacao: '',
+      valorReceber: tipo === 'Receita' ? valorVal : 0,
+      valorPagar: tipo === 'Gasto' ? valorVal : 0,
+      efetuado: fxEfetuado.checked,
+      grupoParcelas: null
+    });
+    save();
+
+    fxValor.value = '';
+    fxCategoria.value = '';
+    fxData.value = fxHojeStr();
+    fxEfetuado.checked = true;
+
+    renderAll();
+  }
+  document.getElementById('fxBtnGasto').addEventListener('click', function(){ fxSalvar('Gasto'); });
+  document.getElementById('fxBtnReceita').addEventListener('click', function(){ fxSalvar('Receita'); });
+
+  fxFiltroMes.addEventListener('change', renderFluxoDiario);
+
+  var FX_CORES_PIZZA = ['#C79A4B','#3F8F6D','#C1543A','#2F6F72','#7A5980','#A67C3D','#55677A','#D98A6B'];
+
+  function fxRenderPizza(gastosDoMes){
+    var wrap = document.getElementById('fxPieWrap');
+    if(!gastosDoMes.length){
+      wrap.innerHTML = '<span class="hint">Nenhum gasto neste mês ainda.</span>';
+      return;
+    }
+    var porCategoria = {};
+    gastosDoMes.forEach(function(l){
+      var nome = categoriaNome(l.categoriaId);
+      porCategoria[nome] = (porCategoria[nome]||0) + Number(l.valorPagar||0);
+    });
+    var total = Object.values(porCategoria).reduce(function(a,b){ return a+b; }, 0);
+    var fatias = Object.entries(porCategoria).sort(function(a,b){ return b[1]-a[1]; });
+
+    var anguloAtual = -90, raio = 55, cx = 60, cy = 60, path = '';
+    fatias.forEach(function(f, i){
+      var fracao = f[1]/total;
+      var anguloFim = anguloAtual + fracao*360;
+      var x1 = cx + raio*Math.cos(anguloAtual*Math.PI/180), y1 = cy + raio*Math.sin(anguloAtual*Math.PI/180);
+      var x2 = cx + raio*Math.cos(anguloFim*Math.PI/180), y2 = cy + raio*Math.sin(anguloFim*Math.PI/180);
+      var largeArc = (anguloFim - anguloAtual) > 180 ? 1 : 0;
+      var cor = FX_CORES_PIZZA[i % FX_CORES_PIZZA.length];
+      path += '<path d="M'+cx+','+cy+' L'+x1.toFixed(2)+','+y1.toFixed(2)+' A'+raio+','+raio+' 0 '+largeArc+' 1 '+x2.toFixed(2)+','+y2.toFixed(2)+' Z" fill="'+cor+'"/>';
+      anguloAtual = anguloFim;
+    });
+    var legenda = fatias.map(function(f, i){
+      var cor = FX_CORES_PIZZA[i % FX_CORES_PIZZA.length];
+      var pct = Math.round((f[1]/total)*100);
+      return '<div class="item"><span class="sw" style="background:'+cor+'"></span><span class="nm">'+escapeHtml(f[0])+'</span><span class="pc">'+pct+'% · '+fmt(f[1])+'</span></div>';
+    }).join('');
+
+    wrap.innerHTML = '<svg viewBox="0 0 120 120">'+path+'</svg><div class="fx-pie-legend">'+legenda+'</div>';
+  }
+
+  function renderFluxoDiario(){
+    if(!fxFiltroMes.value) fxFiltroMes.value = fxMesAtualStr();
+    var mes = fxFiltroMes.value;
+    var doMes = state.lancamentos.filter(function(l){ return l.data.slice(0,7) === mes; })
+      .sort(function(a,b){ return b.data.localeCompare(a.data); });
+
+    var tbody = document.getElementById('fxTbody');
+    document.getElementById('fxEmptyState').style.display = doMes.length ? 'none' : '';
+    tbody.innerHTML = doMes.map(function(l){
+      var d = new Date(l.data+"T00:00:00");
+      var isGasto = Number(l.valorPagar) > 0;
+      var valor = isGasto ? l.valorPagar : l.valorReceber;
+      return '<tr>'+
+        '<td class="num">'+d.toLocaleDateString('pt-BR')+'</td>'+
+        '<td>'+escapeHtml(categoriaNome(l.categoriaId))+'</td>'+
+        '<td class="r num '+(isGasto?'pag':'rec')+'">'+(isGasto?'− ':'+ ')+fmt(valor)+'</td>'+
+        '<td><div class="rowactions"><button type="button" data-fxedit="'+l.id+'">editar</button><button type="button" data-fxdel="'+l.id+'">excluir</button></div></td>'+
+      '</tr>';
+    }).join('');
+
+    Array.prototype.forEach.call(tbody.querySelectorAll('[data-fxedit]'), function(btn){
+      btn.addEventListener('click', function(){
+        switchTab('lancamentos');
+        startEdit(btn.getAttribute('data-fxedit'));
+      });
+    });
+    Array.prototype.forEach.call(tbody.querySelectorAll('[data-fxdel]'), function(btn){
+      btn.addEventListener('click', function(){ deleteLancamento(btn.getAttribute('data-fxdel')); });
+    });
+
+    var totalDespesas = 0, totalReceitas = 0;
+    doMes.forEach(function(l){ totalDespesas += Number(l.valorPagar||0); totalReceitas += Number(l.valorReceber||0); });
+    var saldo = totalReceitas - totalDespesas;
+    document.getElementById('fxLblDespesas').textContent = fmt(totalDespesas);
+    document.getElementById('fxLblReceitas').textContent = fmt(totalReceitas);
+    var lblSaldo = document.getElementById('fxLblSaldo');
+    lblSaldo.textContent = fmt(saldo);
+    lblSaldo.className = 'val num ' + (saldo > 0 ? 'receita' : (saldo < 0 ? 'gasto' : ''));
+
+    fxRenderPizza(doMes.filter(function(l){ return Number(l.valorPagar) > 0; }));
+  }
+
   /* ---------------- render all ---------------- */
   function renderAll(){
     renderAnoSelect();
@@ -973,9 +1198,12 @@
     updateSubDatalist();
     renderTable();
     renderBalancete();
+    if(document.getElementById('tab-fluxodiario').style.display !== 'none') renderFluxoDiario();
   }
 
   resetForm();
+  fxData.value = fxHojeStr();
+  fxFiltroMes.value = fxMesAtualStr();
   renderAll();
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function(){
