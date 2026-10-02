@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0045)file:///C:/Users/evald/Downloads/index_2.html -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Livro Caixa</title>
 <meta name="mobile-web-app-capable" content="yes">
@@ -9,12 +9,12 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Livro Caixa">
 <meta name="theme-color" content="#0F1C17">
-<link rel="icon" type="image/png" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
-<link rel="manifest" href="manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="./index_files/icon-192.png">
+<link rel="apple-touch-icon" href="./index_files/icon-192.png">
+<link rel="manifest" href="file:///C:/Users/evald/Downloads/manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./index_files/css2" rel="stylesheet">
 <style>
   :root {
     --ink-900:#0F1C17;
@@ -343,34 +343,34 @@
 
   <div class="masthead">
     <div class="brand">
-      <img class="mark" src="icon-192.png" alt="" width="30" height="30">
+      <img class="mark" src="./index_files/icon-192.png" alt="" width="30" height="30">
       <div>
         <h1>Livro Caixa</h1>
         <div class="tag">contas a pagar e a receber</div>
       </div>
     </div>
     <div class="tabs">
-      <button class="active" data-tab="lancamentos">Lançamentos</button>
-      <button data-tab="fluxodiario">Fluxo Diário</button>
-      <button data-tab="categorias">Categorias</button>
+      <button class="" data-tab="lancamentos">Lançamentos</button>
+      <button data-tab="fluxodiario" class="">Fluxo Diário</button>
+      <button data-tab="categorias" class="active">Categorias</button>
     </div>
   </div>
 
   <!-- ===================== TAB: LANÇAMENTOS ===================== -->
-  <div id="tab-lancamentos">
+  <div id="tab-lancamentos" style="display: none;">
 
     <div class="panel">
-      <div class="panel-head"><h2>Balancete</h2><span class="hint" id="balanceteScope"></span></div>
-      <div class="balancete" id="balancete"></div>
+      <div class="panel-head"><h2>Balancete</h2><span class="hint" id="balanceteScope">2026 · ano todo</span></div>
+      <div class="balancete" id="balancete"><div class="bsection"><span class="dot receber"></span>A receber</div><div class="brow-label">Efetuado</div><div class="brow-val num ">R$&nbsp;0,00</div><div class="brow-label">Pendente</div><div class="brow-val num ">R$&nbsp;0,00</div><div class="bsection"><span class="dot pagar"></span>A pagar</div><div class="brow-label">Efetuado</div><div class="brow-val num ">R$&nbsp;0,00</div><div class="brow-label">Pendente</div><div class="brow-val num ">R$&nbsp;0,00</div><div class="bsection">Saldo</div><div class="brow-label">Efetuado</div><div class="brow-val num ">R$&nbsp;0,00</div><div class="brow-label">Pendente</div><div class="brow-val num ">R$&nbsp;0,00</div><div class="brow-label brow-total">Total (efet. + pend.)</div><div class="brow-val brow-total num ">R$&nbsp;0,00</div></div>
     </div>
 
     <div class="panel">
       <div class="yearbar">
         <label style="margin:0; text-transform:none; letter-spacing:0; font-size:.8rem;">Ano</label>
-        <select id="anoSelect"></select>
+        <select id="anoSelect"><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option><option value="2031">2031</option></select>
         <button class="btn small" id="btnTodosMeses" type="button">Ver ano todo</button>
       </div>
-      <div class="monthgrid" id="monthGrid"></div>
+      <div class="monthgrid" id="monthGrid"><button type="button" class="monthbtn" data-m="0"><div class="mname">Jan</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button><button type="button" class="monthbtn" data-m="1"><div class="mname">Fev</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button><button type="button" class="monthbtn" data-m="2"><div class="mname">Mar</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button><button type="button" class="monthbtn" data-m="3"><div class="mname">Abr</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button><button type="button" class="monthbtn" data-m="4"><div class="mname">Mai</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button><button type="button" class="monthbtn" data-m="5"><div class="mname">Jun</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button><button type="button" class="monthbtn" data-m="6"><div class="mname">Jul</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button><button type="button" class="monthbtn" data-m="7"><div class="mname">Ago</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button><button type="button" class="monthbtn" data-m="8"><div class="mname">Set</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button><button type="button" class="monthbtn" data-m="9"><div class="mname">Out</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button><button type="button" class="monthbtn" data-m="10"><div class="mname">Nov</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button><button type="button" class="monthbtn" data-m="11"><div class="mname">Dez</div><div class="mrec num">0,00</div><div class="mpag num">0,00</div></button></div>
     </div>
 
     <div class="panel">
@@ -379,11 +379,11 @@
         <div class="grid cols-4">
           <div class="field">
             <label for="fData">Data de vencimento</label>
-            <input type="date" id="fData" required>
+            <input type="date" id="fData" required="">
           </div>
           <div class="field">
             <label for="fCategoria">Categoria</label>
-            <input type="text" id="fCategoria" list="dlCategorias" placeholder="ex: Bancos" required autocomplete="off">
+            <input type="text" id="fCategoria" list="dlCategorias" placeholder="ex: Bancos" required="" autocomplete="off">
             <datalist id="dlCategorias"></datalist>
           </div>
           <div class="field">
@@ -446,14 +446,14 @@
           </thead>
           <tbody id="tbody"></tbody>
         </table>
-        <div class="empty" id="emptyState" style="display:none;">Nada por aqui ainda. Cadastre o primeiro lançamento acima — a categoria e a subcategoria digitadas são criadas automaticamente.</div>
+        <div class="empty" id="emptyState" style="">Nada por aqui ainda. Cadastre o primeiro lançamento acima — a categoria e a subcategoria digitadas são criadas automaticamente.</div>
       </div>
     </div>
 
   </div>
 
   <!-- ===================== TAB: FLUXO DIÁRIO ===================== -->
-  <div id="tab-fluxodiario" style="display:none;">
+  <div id="tab-fluxodiario" style="display: none;">
     <div class="panel">
       <div class="panel-head"><h2>Registro rápido</h2></div>
       <p class="hint" style="margin-bottom:12px;">Pra coisas pequenas do dia a dia — sem precisar preencher o formulário completo. Usa as mesmas categorias do resto do app.</p>
@@ -475,7 +475,7 @@
         </div>
       </div>
       <div class="fx-toggle">
-        <input type="checkbox" id="fxEfetuado" checked>
+        <input type="checkbox" id="fxEfetuado" checked="">
         <label for="fxEfetuado">Já efetuado</label>
       </div>
       <div class="fx-actionrow">
@@ -496,29 +496,29 @@
           </thead>
           <tbody id="fxTbody"></tbody>
         </table>
-        <div class="empty" id="fxEmptyState" style="display:none;">Nada lançado neste mês ainda.</div>
+        <div class="empty" id="fxEmptyState" style="">Nada lançado neste mês ainda.</div>
       </div>
       <div class="fx-resumo3">
-        <div class="box"><span class="lbl">Despesas</span><div class="val gasto num" id="fxLblDespesas">R$ 0,00</div></div>
-        <div class="box"><span class="lbl">Receitas</span><div class="val receita num" id="fxLblReceitas">R$ 0,00</div></div>
-        <div class="box"><span class="lbl">Saldo</span><div class="val num" id="fxLblSaldo">R$ 0,00</div></div>
+        <div class="box"><span class="lbl">Despesas</span><div class="val gasto num" id="fxLblDespesas">R$&nbsp;0,00</div></div>
+        <div class="box"><span class="lbl">Receitas</span><div class="val receita num" id="fxLblReceitas">R$&nbsp;0,00</div></div>
+        <div class="box"><span class="lbl">Saldo</span><div class="val num " id="fxLblSaldo">R$&nbsp;0,00</div></div>
       </div>
     </div>
 
     <div class="panel">
       <div class="panel-head"><h2>Para onde foi o dinheiro</h2></div>
-      <div class="fx-pie-wrap" id="fxPieWrap"></div>
+      <div class="fx-pie-wrap" id="fxPieWrap"><span class="hint">Nenhum gasto neste mês ainda.</span></div>
     </div>
   </div>
 
   <!-- ===================== TAB: CATEGORIAS ===================== -->
-  <div id="tab-categorias" style="display:none;">
+  <div id="tab-categorias" style="">
     <div class="panel">
       <div class="panel-head"><h2>Nova categoria</h2></div>
       <form id="catForm" class="grid cols-2" style="align-items:end;">
         <div class="field">
           <label for="novaCategoria">Nome da categoria</label>
-          <input type="text" id="novaCategoria" placeholder="ex: Impostos" required>
+          <input type="text" id="novaCategoria" placeholder="ex: Impostos" required="">
         </div>
         <div>
           <button type="submit" class="btn brass">Adicionar categoria</button>
@@ -530,7 +530,20 @@
     <div class="panel">
       <div class="panel-head"><h2>Grupos cadastrados</h2></div>
       <div class="catlist" id="catList"></div>
-      <div class="empty" id="catEmpty" style="display:none;">Nenhuma categoria ainda. Crie uma acima, ou cadastre um lançamento — a categoria entra aqui sozinha.</div>
+      <div class="empty" id="catEmpty" style="">Nenhuma categoria ainda. Crie uma acima, ou cadastre um lançamento — a categoria entra aqui sozinha.</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head"><h2>Backup e transferência entre aparelhos</h2></div>
+      <p class="hint" style="margin-bottom:12px;">Os dados ficam salvos só neste navegador. Pra levar pra um celular novo (ou fazer uma cópia de segurança), baixe o backup aqui e restaure ele no outro aparelho.</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+        <button type="button" class="btn brass" id="btnExportar">⭳ Baixar backup (.json)</button>
+        <label class="btn" style="margin:0; cursor:pointer;">
+          Restaurar backup de um arquivo
+          <input type="file" id="fileImportar" accept=".json,application/json" style="display:none;">
+        </label>
+      </div>
+      <p class="hint" style="margin-top:10px;">Restaurar substitui todos os dados deste aparelho pelos dados do arquivo escolhido.</p>
     </div>
   </div>
 
@@ -691,7 +704,8 @@
   /* ---------------- category datalists + filter select ---------------- */
   function renderCategoriaOptions(){
     var dlCat = document.getElementById('dlCategorias');
-    dlCat.innerHTML = state.categorias.map(function(c){ return '<option value="'+escapeHtml(c.nome)+'">'; }).join('');
+    dlCat.innerHTML = state.categorias.slice().sort(function(a,b){return a.nome.localeCompare(b.nome,'pt-BR');})
+      .map(function(c){ return '<option value="'+escapeHtml(c.nome)+'">'; }).join('');
 
     var filtroSel = document.getElementById('filtroCategoria');
     var prev = filtroSel.value;
@@ -706,7 +720,8 @@
     var cat = findCategoriaByName(catInput);
     var dlSub = document.getElementById('dlSubcategorias');
     var subs = cat ? state.subcategorias.filter(function(s){ return s.categoriaId === cat.id; }) : state.subcategorias;
-    dlSub.innerHTML = subs.map(function(s){ return '<option value="'+escapeHtml(s.nome)+'">'; }).join('');
+    dlSub.innerHTML = subs.slice().sort(function(a,b){return a.nome.localeCompare(b.nome,'pt-BR');})
+      .map(function(s){ return '<option value="'+escapeHtml(s.nome)+'">'; }).join('');
   }
   document.getElementById('fCategoria').addEventListener('input', updateSubDatalist);
 
@@ -1190,6 +1205,47 @@
     fxRenderPizza(doMes.filter(function(l){ return Number(l.valorPagar) > 0; }));
   }
 
+  /* ---------------- backup: exportar / importar ---------------- */
+  document.getElementById('btnExportar').addEventListener('click', function(){
+    var blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    var hoje = new Date().toISOString().slice(0,10);
+    a.href = url;
+    a.download = 'livro-caixa-backup-' + hoje + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  });
+
+  document.getElementById('fileImportar').addEventListener('change', function(e){
+    var file = e.target.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(evt){
+      var dados;
+      try{ dados = JSON.parse(evt.target.result); }
+      catch(err){ alert('Não foi possível ler o arquivo. Verifique se é um backup válido do Livro Caixa.'); return; }
+
+      if(!dados || !Array.isArray(dados.categorias) || !Array.isArray(dados.subcategorias) || !Array.isArray(dados.lancamentos)){
+        alert('Esse arquivo não parece ser um backup do Livro Caixa.');
+        return;
+      }
+      var resumo = dados.lancamentos.length + ' lançamento(s) e ' + dados.categorias.length + ' categoria(s)';
+      if(!confirm('Restaurar este backup (' + resumo + ')?\n\nIsso vai SUBSTITUIR todos os dados atuais deste aparelho. Essa ação não pode ser desfeita.')) return;
+
+      state = dados;
+      save();
+      renderAll();
+      renderCategorias();
+      alert('Backup restaurado com sucesso!');
+    };
+    reader.onerror = function(){ alert('Não foi possível ler o arquivo selecionado.'); };
+    reader.readAsText(file);
+    e.target.value = '';
+  });
+
   /* ---------------- render all ---------------- */
   function renderAll(){
     renderAnoSelect();
@@ -1214,5 +1270,5 @@
   }
 })();
 </script>
-</body>
-</html>
+
+</body></html>
